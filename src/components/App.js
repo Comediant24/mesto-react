@@ -26,10 +26,7 @@ function App() {
   }
 
   function handleCardClick(card) {
-    setSelectedCard({
-      isOpen: true,
-      card: card,
-    });
+    setSelectedCard(card);
   }
 
   function closeAllPopups() {
