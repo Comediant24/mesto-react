@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <body className="root">
+    <div className="root">
       <div className="page">
         <Header />
         <Main
@@ -59,14 +59,14 @@ function App() {
           onClose={closeAllPopups}
         >
           <input
-            class="popup__input popup__input_type_place-image"
+            className="popup__input popup__input_type_place-image"
             name="avatar-link"
             type="url"
             placeholder="Ссылка на картинку"
             required
-            autocomplete="off"
+            autoComplete="off"
           />
-          <span class="popup__error"></span>
+          <span className="popup__error"></span>
         </PopupWithForm>
 
         <PopupWithForm
@@ -76,27 +76,27 @@ function App() {
           onClose={closeAllPopups}
         >
           <input
-            class="popup__input popup__input_type_profile-name"
+            className="popup__input popup__input_type_profile-name"
             name="user-name"
             type="text"
             placeholder="Ваше имя"
             required
-            minlength="2"
-            maxlength="40"
-            autocomplete="off"
+            minLength="2"
+            maxLength="40"
+            autoComplete="off"
           />
-          <span class="popup__error"></span>
+          <span className="popup__error"></span>
           <input
-            class="popup__input popup__input_type_profile-status"
+            className="popup__input popup__input_type_profile-status"
             name="user-job"
             type="text"
             placeholder="Профессия"
             required
-            minlength="2"
-            maxlength="200"
-            autocomplete="off"
+            minLength="2"
+            maxLength="200"
+            autoComplete="off"
           />
-          <span class="popup__error"></span>
+          <span className="popup__error"></span>
         </PopupWithForm>
 
         <PopupWithForm
@@ -106,30 +106,30 @@ function App() {
           onClose={closeAllPopups}
         >
           <input
-            class="popup__input popup__input_type_places-name"
+            className="popup__input popup__input_type_places-name"
             name="places-name"
             type="text"
             placeholder="Название"
             required
-            minlength="1"
-            maxlength="30"
-            autocomplete="off"
+            minLength="1"
+            maxLength="30"
+            autoComplete="off"
           />
-          <span class="popup__error"></span>
+          <span className="popup__error"></span>
           <input
-            class="popup__input popup__input_type_place-image"
+            className="popup__input popup__input_type_place-image"
             name="places-image"
             type="url"
             placeholder="Ссылка на картинку"
             required
-            autocomplete="off"
+            autoComplete="off"
           />
-          <span class="popup__error"></span>
+          <span className="popup__error"></span>
         </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
-    </body>
+    </div>
   );
 }
 

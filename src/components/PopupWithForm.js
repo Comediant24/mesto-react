@@ -14,7 +14,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose }) {
           className={`popup__form popup__form_${name}`}
           name={name}
           action="#"
-          novalidate
+          noValidate
         >
           <h3 className="popup__title">{title}</h3>
           <fieldset className="popup__input-container">{children}</fieldset>
