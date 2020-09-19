@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.30753ec4.chunk.css",
-    "main.js": "/static/js/main.88c95913.chunk.js",
-    "main.js.map": "/static/js/main.88c95913.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.e8402bce.js",
-    "runtime-main.js.map": "/static/js/runtime-main.e8402bce.js.map",
-    "static/js/2.8b66efd4.chunk.js": "/static/js/2.8b66efd4.chunk.js",
-    "static/js/2.8b66efd4.chunk.js.map": "/static/js/2.8b66efd4.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.97b2b28485e0a5ba56046829034d2d38.js": "/precache-manifest.97b2b28485e0a5ba56046829034d2d38.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.30753ec4.chunk.css.map": "/static/css/main.30753ec4.chunk.css.map",
-    "static/js/2.8b66efd4.chunk.js.LICENSE.txt": "/static/js/2.8b66efd4.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/static/media/like_true.9fdebb6b.svg",
-    "static/media/logo.svg": "/static/media/logo.855a8c98.svg"
+    "main.css": "/mesto-react/static/css/main.0df397a6.chunk.css",
+    "main.js": "/mesto-react/static/js/main.c727c16e.chunk.js",
+    "main.js.map": "/mesto-react/static/js/main.c727c16e.chunk.js.map",
+    "runtime-main.js": "/mesto-react/static/js/runtime-main.36fb0e45.js",
+    "runtime-main.js.map": "/mesto-react/static/js/runtime-main.36fb0e45.js.map",
+    "static/js/2.8b66efd4.chunk.js": "/mesto-react/static/js/2.8b66efd4.chunk.js",
+    "static/js/2.8b66efd4.chunk.js.map": "/mesto-react/static/js/2.8b66efd4.chunk.js.map",
+    "index.html": "/mesto-react/index.html",
+    "precache-manifest.c5e788896b5eff7c9db544e47bda0efd.js": "/mesto-react/precache-manifest.c5e788896b5eff7c9db544e47bda0efd.js",
+    "service-worker.js": "/mesto-react/service-worker.js",
+    "static/css/main.0df397a6.chunk.css.map": "/mesto-react/static/css/main.0df397a6.chunk.css.map",
+    "static/js/2.8b66efd4.chunk.js.LICENSE.txt": "/mesto-react/static/js/2.8b66efd4.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/mesto-react/static/media/like_true.9fdebb6b.svg",
+    "static/media/logo.svg": "/mesto-react/static/media/logo.855a8c98.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e8402bce.js",
+    "static/js/runtime-main.36fb0e45.js",
     "static/js/2.8b66efd4.chunk.js",
-    "static/css/main.30753ec4.chunk.css",
-    "static/js/main.88c95913.chunk.js"
+    "static/css/main.0df397a6.chunk.css",
+    "static/js/main.c727c16e.chunk.js"
   ]
 }
