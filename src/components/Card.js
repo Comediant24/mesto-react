@@ -1,12 +1,17 @@
 import React from 'react';
 
-function Card({ card }) {
+function Card({ card, onCardClick }) {
+  function handleClick() {
+    onCardClick(card);
+  }
+
   return (
     <li className="places__items">
       <img
         src={card.link}
         alt={`Лучшая фотография ${card.name}`}
         className="places__image"
+        onClick={handleClick}
       />
       <div className="places__name">
         <h2 className="places__title">{card.name}</h2>

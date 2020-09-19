@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import '../index.css';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(
@@ -11,6 +12,7 @@ function App() {
   );
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(false);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -24,10 +26,18 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(card) {
+    setSelectedCard({
+      isOpen: true,
+      card: card,
+    });
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setSelectedCard(false);
   }
 
   return (
@@ -38,6 +48,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
 
@@ -116,27 +127,7 @@ function App() {
           <span class="popup__error"></span>
         </PopupWithForm>
 
-        <template id="places-template">
-          <li className="places__items">
-            <img src="#" alt="#" className="places__image" />
-            <div className="places__name">
-              <h2 className="places__title"></h2>
-              <div className="places__like">
-                <button
-                  className="button places__button-like"
-                  type="button"
-                  aria-label="Поставить лайк месту"
-                ></button>
-                <p className="places__like-counter"></p>
-              </div>
-            </div>
-            <button
-              className="button places__button-delete"
-              type="button"
-              aria-label="Удалить карточку"
-            ></button>
-          </li>
-        </template>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
     </body>
   );

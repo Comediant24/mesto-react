@@ -1,16 +1,28 @@
 import React from 'react';
 
-function ImagePopup() {
+function ImagePopup({ card, onClose }) {
   return (
-    <section className="popup popup_image-places">
-      <div className="popup__overlay popup__overlay_image-places"></div>
+    <section
+      className={`popup popup_image-places ${
+        card.isOpen ? 'popup_opened' : ''
+      }`}
+    >
+      <div
+        onClick={onClose}
+        className="popup__overlay popup__overlay_image-places"
+      ></div>
       <figure className="popup__places">
-        <img src="#" alt="#" className="popup__places-image" />
-        <figcaption className="popup__places-title"></figcaption>
+        <img
+          src={card.img}
+          alt={`Лучшая фотография ${card.name}`}
+          className="popup__places-image"
+        />
+        <figcaption className="popup__places-title">{card.title}</figcaption>
         <button
           className="button popup__close-button popup__close-button_image-places"
           type="button"
           aria-label="Закрыть окно"
+          onClick={onClose}
         ></button>
       </figure>
     </section>
