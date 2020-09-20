@@ -3,7 +3,9 @@ import React from 'react';
 function ImagePopup({ card, onClose }) {
   return (
     <section
-      className={`popup popup_image-places ${card ? 'popup_opened' : ''}`}
+      className={`popup popup_image-places ${
+        card.isOpen ? 'popup_opened' : ''
+      }`}
     >
       <div
         onClick={onClose}
