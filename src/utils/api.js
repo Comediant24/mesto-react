@@ -82,6 +82,13 @@ class Api {
       }),
     }).then((res) => this._handleResponse(res));
   }
+
+  changeLikeCardStatus(id, like) {
+    return fetch(`${this._url}cards/likes/${id}`, {
+      method: like ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    }).then((res) => this._handleResponse(res));
+  }
 }
 
 const api = new Api(currentUser);
