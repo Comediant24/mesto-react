@@ -1,9 +1,15 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick }) {
+  const { _id } = React.useContext(CurrentUserContext);
+
   function handleClick() {
     onCardClick(card);
   }
+
+  const isOwn = card.owner._id === _id;
+  const isLiked = card.likes.some((i) => i._id === _id);
 
   return (
     <li className="places__items">
@@ -17,7 +23,9 @@ function Card({ card, onCardClick }) {
         <h2 className="places__title">{card.name}</h2>
         <div className="places__like">
           <button
-            className="button places__button-like"
+            className={`button places__button-like ${
+              isLiked ? 'places__button-like_enabled' : ''
+            }`}
             type="button"
             aria-label="Поставить лайк месту"
           ></button>
@@ -25,7 +33,7 @@ function Card({ card, onCardClick }) {
         </div>
       </div>
       <button
-        className="button places__button-delete"
+        className={`button ${isOwn ? 'places__button-delete' : ''}`}
         type="button"
         aria-label="Удалить карточку"
       ></button>
