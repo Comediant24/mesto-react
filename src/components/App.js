@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(
@@ -46,6 +47,11 @@ function App() {
     setSelectedCard({});
   }
 
+  function handleUpdateUser(user) {
+    api.setUserInfo(user).then((update) => setCurrentUser(update));
+    closeAllPopups();
+  }
+
   return (
     <div className="root">
       <div className="page">
@@ -76,35 +82,11 @@ function App() {
             <span className="popup__error"></span>
           </PopupWithForm>
 
-          <PopupWithForm
-            name="edit-profile"
-            title="Редактировать профиль"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input
-              className="popup__input popup__input_type_profile-name"
-              name="user-name"
-              type="text"
-              placeholder="Ваше имя"
-              required
-              minLength="2"
-              maxLength="40"
-              autoComplete="off"
-            />
-            <span className="popup__error"></span>
-            <input
-              className="popup__input popup__input_type_profile-status"
-              name="user-job"
-              type="text"
-              placeholder="Профессия"
-              required
-              minLength="2"
-              maxLength="200"
-              autoComplete="off"
-            />
-            <span className="popup__error"></span>
-          </PopupWithForm>
+            onUpdateUser={handleUpdateUser}
+          />
 
           <PopupWithForm
             name="add-places"

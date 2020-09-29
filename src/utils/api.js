@@ -35,8 +35,8 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: formData['user-name'],
-        about: formData['user-job'],
+        name: formData.name,
+        about: formData.about,
       }),
     }).then((res) => this._handleResponse(res));
   }
