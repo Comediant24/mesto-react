@@ -78,7 +78,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: formData['avatar-link'],
+        avatar: formData.avatar,
       }),
     }).then((res) => this._handleResponse(res));
   }
