@@ -17,8 +17,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   }
 
   function handleInputChange(e) {
-    const value = e.target.value;
-    e.target.name === 'user-name' ? setName(value) : setDescription(value);
+    e.target.name === 'user-name'
+      ? setName(e.target.value)
+      : setDescription(e.target.value);
   }
 
   React.useEffect(() => {

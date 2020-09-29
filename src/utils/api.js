@@ -46,8 +46,8 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: formData['places-name'],
-        link: formData['places-image'],
+        name: formData.name,
+        link: formData.link,
       }),
     }).then((res) => this._handleResponse(res));
   }
