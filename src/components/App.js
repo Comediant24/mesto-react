@@ -28,10 +28,13 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => console.error(err));
   }
 
   function handleCardDelete(card) {
@@ -72,18 +75,24 @@ function App() {
   }
 
   function handleUpdateUser(user) {
-    api.setUserInfo(user).then((update) => setCurrentUser(update));
-    closeAllPopups();
+    api
+      .setUserInfo(user)
+      .then((update) => setCurrentUser(update))
+      .then(() => closeAllPopups());
   }
 
   function handleUpdateAvatar(avatar) {
-    api.changeAvatar(avatar).then((update) => setCurrentUser(update));
-    closeAllPopups();
+    api
+      .changeAvatar(avatar)
+      .then((update) => setCurrentUser(update))
+      .then(() => closeAllPopups());
   }
 
   function handleAddPlaceSubmit(card) {
-    api.addCard(card).then((update) => setCards([...cards, update]));
-    closeAllPopups();
+    api
+      .addCard(card)
+      .then((update) => setCards([update, ...cards]))
+      .then(() => closeAllPopups());
   }
 
   return (
