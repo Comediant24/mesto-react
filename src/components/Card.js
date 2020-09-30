@@ -41,12 +41,16 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
           <p className="places__like-counter">{card.likes.length}</p>
         </div>
       </div>
-      <button
-        className={`button ${isOwn ? 'places__button-delete' : ''}`}
-        type="button"
-        aria-label="Удалить карточку"
-        onClick={handleDeleteClick}
-      ></button>
+      {isOwn ? (
+        <button
+          className="button places__button-delete"
+          type="button"
+          aria-label="Удалить карточку"
+          onClick={handleDeleteClick}
+        ></button>
+      ) : (
+        ''
+      )}
     </li>
   );
 }
