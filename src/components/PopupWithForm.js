@@ -9,6 +9,21 @@ function PopupWithForm({
   onClose,
   onSubmit,
 }) {
+  const escFunction = React.useCallback(
+    (e) => {
+      if (e.keyCode === 27) onClose();
+    },
+    [onClose]
+  );
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', escFunction);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction);
+    };
+  }, [escFunction]);
+
   return (
     <>
       <section
