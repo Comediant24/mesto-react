@@ -6,10 +6,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const [titlePlace, setTitlePlace] = React.useState('');
   const [imagePlace, setImagePlace] = React.useState('');
 
-  const [titleValid, setTitleValid] = React.useState(true);
-  const [imageValid, setImageValid] = React.useState(true);
+  const [titleValid, setTitleValid] = React.useState(false);
+  const [imageValid, setImageValid] = React.useState(false);
 
-  const [isEnabled, setIsEnabled] = React.useState(true);
+  const [isEnabled, setIsEnabled] = React.useState(false);
 
   function handleTitleChange(value, valid) {
     setTitlePlace(value);
