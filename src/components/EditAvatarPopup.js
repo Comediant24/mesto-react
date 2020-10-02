@@ -28,7 +28,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         required
         autoComplete="off"
       />
-      <span className="popup__error"></span>
     </PopupWithForm>
   );
 }
