@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input';
+import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
@@ -25,6 +25,10 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     setIsEnabled(avatarValid);
   }, [avatarValid]);
 
+  React.useEffect(() => {
+    setAvatarLink('');
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       name="avatar-change"
@@ -34,7 +38,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onSubmit={handleSubmit}
       isEnabled={isEnabled}
     >
-      <Input
+      <PopupInput
+        isOpen={isOpen}
         value={avatarLink}
         changeValue={handleAvatarChange}
         className="popup__input_type_place-image"

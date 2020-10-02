@@ -1,6 +1,6 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import Input from './Input';
+import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
@@ -41,7 +41,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
+
+  React.useEffect(() => {
+    setNameValid(true);
+    setDescriptionValid(true);
+    setIsEnabled(true);
+  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -52,7 +58,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       onSubmit={handleSubmit}
       isEnabled={isEnabled}
     >
-      <Input
+      <PopupInput
+        isEnabled={isEnabled}
+        isOpen={isOpen}
         value={name}
         changeValue={handleNameChange}
         className="popup__input_type_profile-name"
@@ -64,8 +72,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         maxLength="40"
         autoComplete="off"
       />
-      <Input
+      <PopupInput
         value={description}
+        isOpen={isOpen}
         changeValue={handleDescriptionChange}
         className="popup__input_type_profile-status"
         name="user-job"

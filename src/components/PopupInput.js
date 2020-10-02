@@ -1,7 +1,14 @@
 import React from 'react';
 import FormValidator from './FormValidator';
 
-const Input = ({ changeValue, className, name, value, ...rest }) => {
+const PopupInput = ({
+  isOpen,
+  changeValue,
+  className,
+  name,
+  value,
+  ...rest
+}) => {
   const [isValid, setIsValid] = React.useState(true);
   const [showValidationMessage, setShowValidationMessage] = React.useState('');
 
@@ -14,6 +21,10 @@ const Input = ({ changeValue, className, name, value, ...rest }) => {
     setIsValid(!e.target.validity.valid);
     setShowValidationMessage(e.target.validationMessage);
   }
+
+  React.useEffect(() => {
+    setIsValid(false);
+  }, [isOpen]);
 
   return (
     <>
@@ -32,4 +43,4 @@ const Input = ({ changeValue, className, name, value, ...rest }) => {
   );
 };
 
-export default Input;
+export default PopupInput;

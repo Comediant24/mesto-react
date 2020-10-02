@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input';
+import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
@@ -35,6 +35,14 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       : setIsEnabled(false);
   }, [titleValid, imageValid]);
 
+  React.useEffect(() => {
+    setTitlePlace('');
+    setImagePlace('');
+    setTitleValid(false);
+    setImageValid(false);
+    setIsEnabled(false);
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       name="add-places"
@@ -44,7 +52,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       onSubmit={handleSubmit}
       isEnabled={isEnabled}
     >
-      <Input
+      <PopupInput
+        isOpen={isOpen}
         value={titlePlace}
         changeValue={handleTitleChange}
         className="popup__input_type_places-name"
@@ -56,7 +65,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         maxLength="30"
         autoComplete="off"
       />
-      <Input
+      <PopupInput
+        isOpen={isOpen}
         value={imagePlace}
         changeValue={handleImageChange}
         className="popup__input_type_place-image"
