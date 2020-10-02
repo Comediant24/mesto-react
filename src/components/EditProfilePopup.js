@@ -1,5 +1,6 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Input from './Input';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
@@ -7,6 +8,21 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
+
+  const [nameValid, setNameValid] = React.useState(true);
+  const [descriptionValid, setDescriptionValid] = React.useState(true);
+
+  const [isEnabled, setIsEnabled] = React.useState(true);
+
+  function handleNameChange(value, valid) {
+    setName(value);
+    setNameValid(valid);
+  }
+
+  function handleDescriptionChange(value, valid) {
+    setDescription(value);
+    setDescriptionValid(valid);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,10 +32,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   }
 
-  function handleInputChange(e) {
-    const value = e.target.value;
-    e.target.name === 'user-name' ? setName(value) : setDescription(value);
-  }
+  React.useEffect(() => {
+    Array.from([nameValid, descriptionValid]).every((e) => e === true) === true
+      ? setIsEnabled(true)
+      : setIsEnabled(false);
+  }, [nameValid, descriptionValid]);
 
   React.useEffect(() => {
     setName(currentUser.name);
@@ -33,9 +50,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isEnabled={isEnabled}
     >
-      <input
-        className="popup__input popup__input_type_profile-name"
+      <Input
+        value={name}
+        changeValue={handleNameChange}
+        className="popup__input_type_profile-name"
         name="user-name"
         type="text"
         placeholder="Ваше имя"
@@ -43,12 +63,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         minLength="2"
         maxLength="40"
         autoComplete="off"
-        onChange={handleInputChange}
-        value={name || ''}
       />
-      <span className="popup__error"></span>
-      <input
-        className="popup__input popup__input_type_profile-status"
+      <Input
+        value={description}
+        changeValue={handleDescriptionChange}
+        className="popup__input_type_profile-status"
         name="user-job"
         type="text"
         placeholder="Профессия"
@@ -56,10 +75,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         minLength="2"
         maxLength="200"
         autoComplete="off"
-        onChange={handleInputChange}
-        value={description || ''}
       />
-      <span className="popup__error"></span>
     </PopupWithForm>
   );
 }

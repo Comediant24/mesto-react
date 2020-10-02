@@ -1,6 +1,14 @@
 import React from 'react';
 
-function PopupWithForm({ name, title, children, isOpen, onClose, onSubmit }) {
+function PopupWithForm({
+  isEnabled,
+  name,
+  title,
+  children,
+  isOpen,
+  onClose,
+  onSubmit,
+}) {
   return (
     <>
       <section
@@ -20,8 +28,11 @@ function PopupWithForm({ name, title, children, isOpen, onClose, onSubmit }) {
           <h3 className="popup__title">{title}</h3>
           <fieldset className="popup__input-container">{children}</fieldset>
           <button
-            className="button popup__submit-button popup__button-profile"
+            className={`button popup__submit-button popup__button-profile ${
+              isEnabled ? '' : 'popup__submit-button_disabled'
+            }`}
             type="submit"
+            disabled={!isEnabled}
           >
             Сохранить
           </button>
