@@ -95,6 +95,17 @@ function App() {
       .then(() => closeAllPopups());
   }
 
+  React.useEffect(() => {
+    function escFunction(e) {
+      if (e.keyCode === 27) closeAllPopups();
+    }
+    document.addEventListener('keydown', escFunction);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction);
+    };
+  }, []);
+
   return (
     <div className="root">
       <div className="page">

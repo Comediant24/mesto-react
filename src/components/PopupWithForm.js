@@ -9,21 +9,6 @@ function PopupWithForm({
   onClose,
   onSubmit,
 }) {
-  const escFunction = React.useCallback(
-    (e) => {
-      if (e.keyCode === 27) onClose();
-    },
-    [onClose]
-  );
-
-  React.useEffect(() => {
-    document.addEventListener('keydown', escFunction);
-
-    return () => {
-      document.removeEventListener('keydown', escFunction);
-    };
-  }, [escFunction]);
-
   return (
     <section className={`popup popup_${name} ${isOpen ? 'popup_opened' : ''}`}>
       <div
@@ -37,25 +22,25 @@ function PopupWithForm({
         onSubmit={onSubmit}
         noValidate
       >
-          <h3 className="popup__title">{title}</h3>
-          <fieldset className="popup__input-container">{children}</fieldset>
-          <button
-            className={`button popup__submit-button popup__button-profile ${
-              isEnabled ? '' : 'popup__submit-button_disabled'
-            }`}
-            type="submit"
-            disabled={!isEnabled}
-          >
-            Сохранить
-          </button>
-          <button
-            className={`button popup__close-button popup__close-button_${name}`}
-            onClick={onClose}
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </form>
-      </section>
+        <h3 className="popup__title">{title}</h3>
+        <fieldset className="popup__input-container">{children}</fieldset>
+        <button
+          className={`button popup__submit-button popup__button-profile ${
+            isEnabled ? '' : 'popup__submit-button_disabled'
+          }`}
+          type="submit"
+          disabled={!isEnabled}
+        >
+          Сохранить
+        </button>
+        <button
+          className={`button popup__close-button popup__close-button_${name}`}
+          onClick={onClose}
+          type="button"
+          aria-label="Закрыть окно"
+        ></button>
+      </form>
+    </section>
   );
 }
 
