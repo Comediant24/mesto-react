@@ -8,6 +8,7 @@ function PopupWithForm({
   isOpen,
   onClose,
   onSubmit,
+  buttonText,
 }) {
   return (
     <section className={`popup popup_${name} ${isOpen ? 'popup_opened' : ''}`}>
@@ -24,6 +25,11 @@ function PopupWithForm({
       >
         <h3 className="popup__title">{title}</h3>
         <fieldset className="popup__input-container">{children}</fieldset>
+        {/* {children ? (
+          <fieldset className="popup__input-container">{children}</fieldset>
+        ) : (
+          ''
+        )} */}
         <button
           className={`button popup__submit-button popup__button-profile ${
             isEnabled ? '' : 'popup__submit-button_disabled'
@@ -31,7 +37,7 @@ function PopupWithForm({
           type="submit"
           disabled={!isEnabled}
         >
-          Сохранить
+          {buttonText || 'Сохранить'}
         </button>
         <button
           className={`button popup__close-button popup__close-button_${name}`}

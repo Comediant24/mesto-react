@@ -6,9 +6,16 @@
   font-size: 18px;
   line-height: 1.2;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   border: 0;
   transition: background-color 0.2s linear;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 450px) {
+  .popup__submit-button {
+    margin-top: 48px;
+  }
 }
 
 .popup__save-button:hover {
