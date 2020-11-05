@@ -19,12 +19,15 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDelete, setCardDelete] = useState({});
   const [isOpenDeletePopupReq, setIsOpenDeletePopupReq] = useState(false);
+  const [isCardsLoading, setIsCardsLoading] = useState(false);
 
   useEffect(() => {
+    setIsCardsLoading(true);
     api
       .getInitialCards()
       .then((cardElements) => setCards(cardElements))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setIsCardsLoading(false));
   }, []);
 
   function handleCardLike(card) {
@@ -131,6 +134,7 @@ function App() {
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDeleteRequest}
+            isCardsLoading={isCardsLoading}
           />
           <Footer />
 

@@ -8,6 +8,7 @@
 @import url(./__button-delete/places__button-delete.css);
 @import url(./__like-counter/places__like-counter.css);
 @import url(./__like/places__like.css);
+@import url(./__loading-spinner/places__loading-spinner.css);
 
 .places {
   margin-bottom: 66px;

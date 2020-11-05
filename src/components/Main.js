@@ -10,6 +10,7 @@ function Main({
   cards,
   onCardLike,
   onCardDelete,
+  isCardsLoading,
 }) {
   const { name, about, avatar } = React.useContext(CurrentUserContext);
 
@@ -46,15 +47,32 @@ function Main({
       </section>
       <section className="places">
         <ul className="places__cards">
-          {cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              onCardLike={onCardLike}
-              onCardDelete={onCardDelete}
-              onCardClick={onCardClick}
-            />
-          ))}
+          {isCardsLoading ? (
+            <div className="places__loading-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            cards.map((card) => (
+              <Card
+                key={card._id}
+                card={card}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
+                onCardClick={onCardClick}
+              />
+            ))
+          )}
         </ul>
       </section>
     </main>
