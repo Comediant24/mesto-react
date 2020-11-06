@@ -1,89 +1,72 @@
-import React from 'react';
+import React, { createRef, useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
+  const checkValidity = createRef();
 
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    setIsValid,
+    resetForm,
+  } = useFormWithValidation();
 
-  const [nameValid, setNameValid] = React.useState(true);
-  const [descriptionValid, setDescriptionValid] = React.useState(true);
-
-  const [isEnabled, setIsEnabled] = React.useState(true);
-
-  function handleNameChange(value, valid) {
-    setName(value);
-    setNameValid(valid);
-  }
-
-  function handleDescriptionChange(value, valid) {
-    setDescription(value);
-    setDescriptionValid(valid);
-  }
+  useEffect(() => {
+    setIsValid(checkValidity.current.checkValidity());
+  }, [setIsValid, checkValidity]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateUser({
-      name,
-      about: description,
-    });
+    onUpdateUser(values);
   }
 
-  React.useEffect(() => {
-    Array.from([nameValid, descriptionValid]).every((e) => e === true) === true
-      ? setIsEnabled(true)
-      : setIsEnabled(false);
-  }, [nameValid, descriptionValid]);
-
-  React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser, isOpen]);
-
-  React.useEffect(() => {
-    setNameValid(true);
-    setDescriptionValid(true);
-    setIsEnabled(true);
-  }, [isOpen]);
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser);
+    }
+  }, [currentUser, resetForm, isOpen]);
 
   return (
     <PopupWithForm
+      ref={checkValidity}
       name="edit-profile"
       title="Редактировать профиль"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isEnabled={isEnabled}
+      isValid={isValid}
     >
       <PopupInput
-        isEnabled={isEnabled}
-        isOpen={isOpen}
-        value={name}
-        changeValue={handleNameChange}
+        value={values.name}
+        changeValue={handleChange}
         className="popup__input_type_profile-name"
-        name="user-name"
+        name="name"
         type="text"
         placeholder="Ваше имя"
         required
         minLength="2"
         maxLength="40"
         autoComplete="off"
+        validationMessage={errors.name}
       />
       <PopupInput
-        value={description}
-        isOpen={isOpen}
-        changeValue={handleDescriptionChange}
+        value={values.about}
+        changeValue={handleChange}
         className="popup__input_type_profile-status"
-        name="user-job"
+        name="about"
         type="text"
         placeholder="Профессия"
         required
         minLength="2"
         maxLength="200"
         autoComplete="off"
+        validationMessage={errors.about}
       />
     </PopupWithForm>
   );

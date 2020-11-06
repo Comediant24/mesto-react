@@ -18,7 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [cardDelete, setCardDelete] = useState({});
-  const [isOpenDeletePopupReq, setIsOpenDeletePopupReq] = useState(false);
+  const [isDeletteReqPopupOpen, setIsDeletteReqPopupOpen] = useState(false);
   const [isCardsLoading, setIsCardsLoading] = useState(false);
 
   useEffect(() => {
@@ -42,9 +42,8 @@ function App() {
   }
 
   function handleCardDeleteRequest(card) {
-    console.log('handleCardDeleteRequest -> card', card);
     setCardDelete(card);
-    setIsOpenDeletePopupReq(true);
+    setIsDeletteReqPopupOpen(true);
   }
 
   function handleCardDelete(e) {
@@ -55,7 +54,7 @@ function App() {
         const newCards = cards.filter((c) => c !== cardDelete);
         setCards(newCards);
       })
-      .then(() => setIsOpenDeletePopupReq(false));
+      .then(() => setIsDeletteReqPopupOpen(false));
   }
 
   useEffect(() => {
@@ -86,7 +85,7 @@ function App() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setSelectedCard({});
-    setIsOpenDeletePopupReq(false);
+    setIsDeletteReqPopupOpen(false);
   }
 
   function handleUpdateUser(user) {
@@ -162,7 +161,7 @@ function App() {
             isEnabled="true"
             name="card-delete"
             title="Вы уверены?"
-            isOpen={isOpenDeletePopupReq}
+            isOpen={isDeletteReqPopupOpen}
             onClose={closeAllPopups}
             onSubmit={handleCardDelete}
             buttonText="Да"

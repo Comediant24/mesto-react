@@ -1,33 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PopupInput from './PopupInput';
+import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const [avatarLink, setAvatarLink] = React.useState('');
-
-  const [avatarValid, setAvatarValid] = React.useState(false);
-
-  const [isEnabled, setIsEnabled] = React.useState(false);
-
-  function handleAvatarChange(value, valid) {
-    setAvatarLink(value);
-    setAvatarValid(valid);
-  }
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+  } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateAvatar({
-      avatar: avatarLink,
-    });
+    onUpdateAvatar(values);
   }
 
-  React.useEffect(() => {
-    setIsEnabled(avatarValid);
-  }, [avatarValid]);
-
-  React.useEffect(() => {
-    setAvatarLink('');
-  }, [isOpen]);
+  useEffect(() => {
+    resetForm();
+  }, [resetForm, isOpen]);
 
   return (
     <PopupWithForm
@@ -36,18 +28,18 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isEnabled={isEnabled}
+      isValid={isValid}
     >
       <PopupInput
-        isOpen={isOpen}
-        value={avatarLink}
-        changeValue={handleAvatarChange}
+        value={values.avatar}
+        changeValue={handleChange}
         className="popup__input_type_place-image"
-        name="avatar-link"
+        name="avatar"
         type="url"
         placeholder="Ссылка на картинку"
         required
         autoComplete="off"
+        validationMessage={errors.avatar}
       />
     </PopupWithForm>
   );
