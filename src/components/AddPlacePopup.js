@@ -3,7 +3,7 @@ import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, isSending }) {
   const {
     values,
     handleChange,
@@ -29,6 +29,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      buttonText={isSending ? 'Сохранение...' : 'Сохранить'}
     >
       <PopupInput
         value={values.name}

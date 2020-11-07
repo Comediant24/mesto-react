@@ -20,6 +20,7 @@ function App() {
   const [cardDelete, setCardDelete] = useState({});
   const [isDeletteReqPopupOpen, setIsDeletteReqPopupOpen] = useState(false);
   const [isCardsLoading, setIsCardsLoading] = useState(false);
+  const [isDataSending, setDataSending] = useState(false);
 
   useEffect(() => {
     setIsCardsLoading(true);
@@ -47,6 +48,7 @@ function App() {
   }
 
   function handleCardDelete(e) {
+    setDataSending(true);
     e.preventDefault();
     api
       .removeCard(cardDelete._id)
@@ -54,7 +56,8 @@ function App() {
         const newCards = cards.filter((c) => c !== cardDelete);
         setCards(newCards);
       })
-      .then(() => setIsDeletteReqPopupOpen(false));
+      .then(() => setIsDeletteReqPopupOpen(false))
+      .finally(() => setDataSending(false));
   }
 
   useEffect(() => {
@@ -89,24 +92,30 @@ function App() {
   }
 
   function handleUpdateUser(user) {
+    setDataSending(true);
     api
       .setUserInfo(user)
       .then((update) => setCurrentUser(update))
-      .then(() => closeAllPopups());
+      .then(() => closeAllPopups())
+      .finally(() => setDataSending(false));
   }
 
   function handleUpdateAvatar(avatar) {
+    setDataSending(true);
     api
       .changeAvatar(avatar)
       .then((update) => setCurrentUser(update))
-      .then(() => closeAllPopups());
+      .then(() => closeAllPopups())
+      .finally(() => setDataSending(false));
   }
 
   function handleAddPlaceSubmit(card) {
+    setDataSending(true);
     api
       .addCard(card)
       .then((update) => setCards([update, ...cards]))
-      .then(() => closeAllPopups());
+      .then(() => closeAllPopups())
+      .finally(() => setDataSending(false));
   }
 
   useEffect(() => {
@@ -138,18 +147,21 @@ function App() {
           <Footer />
 
           <EditAvatarPopup
+            isSending={isDataSending}
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
 
           <EditProfilePopup
+            isSending={isDataSending}
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
 
           <AddPlacePopup
+            isSending={isDataSending}
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
@@ -164,7 +176,7 @@ function App() {
             isOpen={isDeletteReqPopupOpen}
             onClose={closeAllPopups}
             onSubmit={handleCardDelete}
-            buttonText="Да"
+            buttonText={isDataSending ? 'Удаление...' : 'Да'}
           />
         </CurrentUserContext.Provider>
       </div>

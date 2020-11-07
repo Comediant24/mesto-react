@@ -4,10 +4,9 @@ import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import PopupInput from './PopupInput';
 import PopupWithForm from './PopupWithForm';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSending }) {
   const currentUser = useContext(CurrentUserContext);
   const checkValidity = createRef();
-
   const {
     values,
     handleChange,
@@ -41,6 +40,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      buttonText={isSending ? 'Сохранение...' : 'Сохранить'}
     >
       <PopupInput
         value={values.name}

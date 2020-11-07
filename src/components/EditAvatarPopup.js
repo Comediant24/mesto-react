@@ -3,7 +3,7 @@ import PopupInput from './PopupInput';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isSending }) {
   const {
     values,
     handleChange,
@@ -29,6 +29,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      buttonText={isSending ? 'Сохранение...' : 'Сохранить'}
     >
       <PopupInput
         value={values.avatar}
